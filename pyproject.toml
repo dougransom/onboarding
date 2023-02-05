@@ -8,8 +8,9 @@ authors = [{name = "Doug Ransom", email = "doug@ransom.vip"}]
 readme = "readme.md"
 version="1.0"
 description = "Utility to help Optimize relationship managers create the 3 onboarding PDF files"
+requires-python = ">=3.10"
 
-dependencies=["fdfgen","PySimpleGUI"]
+dependencies=["fdfgen >= 0.16.1","PySimpleGUI >= 4.60.4"]
 [project.scripts]
 new_onboarding_docs = "optimize_onboarding.onboarding_fill:main"
 
