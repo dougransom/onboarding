@@ -6,6 +6,7 @@ build-backend = "flit_core.buildapi"
 name = "optimize_onboarding"
 authors = [{name = "Doug Ransom", email = "doug@ransom.vip"}]
 readme = "readme.md"
-dynamic = ["version", "description"]
 version="1.0"
 description = "Utility to help Optimize relationship managers create the 3 onboarding PDF files"
+[project.gui-scripts]
+new_onboarding_docs = "onboarding_fill"
