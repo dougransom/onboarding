@@ -11,7 +11,12 @@ description = "Utility to help Optimize relationship managers create the 3 onboa
 requires-python = ">=3.10"
 
 dependencies=["fdfgen >= 0.16.1","PySimpleGUI >= 4.60.4"]
+[project.optional-dependencies]
+dev=['pyinstaller']
+
 [project.scripts]
+#most users would never run this script, they will use a command of the same
+#name produced by pyinstaller.
 new_onboarding_docs = "optimize_onboarding.onboarding_fill:main"
 
 
