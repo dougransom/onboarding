@@ -2,7 +2,7 @@ PS C:\Users\doug\code\onboarding> pdftk .\o1.pdf dump_data_fields           ---
 
 # Installation
 
-1. Install pdftk from [pdf labs)(https://www.pdflabs.com/).  This is a program
+1. Install pdftk from [pdf labs](https://www.pdflabs.com/).  This is a program
 that can, among other things, fill PDF forms.
 1.  Put the onboarding_fill.exe program in a folder, and put it in  your path.  You can use the same folder as where you are instructed to place o1.pdf below.  something like `c:\Users\yourname\ob`  
 1.  Anywhere you like in your file system, create a folder for your three Optimize client onboarding files. Download the PDFs from Optimize.    Rename them o1.pdf, o2.pdf, and o3.pdf (keep the same number as the original name).  This is required to make the tool work.  
