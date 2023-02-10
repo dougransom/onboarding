@@ -4,6 +4,28 @@ from fdfgen import forge_fdf
 import subprocess
 from os import environ
 from pathlib import Path
+import more_itertools
+
+def parse_data_fields(str):
+    lines=str.splitlines()
+    fields=list(more_itertools.split_at(lines,lambda x: x=="---"))
+    d={}
+    for field in fields:
+        fname=""
+        fvalue=""
+
+        for item in field:
+            s=item.split(':')
+            k,v=s[0],s[1].strip()
+            if k=="FieldName":
+                fname=v
+            if k=="FieldValue":
+                fvalue=v
+        d[fname]=fvalue     
+    return d   
+
+ 
+
 
 def main():
     sg.theme("DarkAmber")
@@ -30,6 +52,24 @@ def main():
             sg.Window("File Template Error",input_error_layout).read()
             exit(3)
 
+    #get the defaults from o2.pdf
+    full_path_to_o2=inputs[1]
+
+    pdf_read_defaults=["pdftk",full_path_to_o2,"dump_data_fields"]
+
+
+    data_fields=subprocess.run(pdf_read_defaults,capture_output=True)
+    captured_output=data_fields.stdout.decode("utf-8") 
+    fm=field_mappings=parse_data_fields(captured_output)
+    #print(f"Field mappings {field_mappings}")
+
+    fields = ["Client Name","Client Name_2","Portfolio Manager","CRM Contact ID","Optimize Relationship Manager"]
+    values_=[ fm["Client Name 1"],fm["Client Name 2"],fm["Licensed Portfolio Manager"],"",fm["Optimize Relationship Manager"]]
+    fv=zip(fields,values_)
+
+    layout = [ [sg.Text(x[0]),sg.InputText(key=f"-{x[0]}-",default_text=x[1])]  for x in fv] + [[sg.Button('OK'),sg.Button('Cancel')]]
+
+
     window=sg.Window("Enter the data",layout)
 
     event, values = window.read()
@@ -38,7 +78,7 @@ def main():
     print(f'event: {event} You entered {values}')
     tf=tempfile.NamedTemporaryFile
 
-    fields_o1= [ ("Adviser Rempresentative",values["-Portfolio Manager-"]), ("Client Name",values["-Client Name-"]),("Client Name_2",values["-Client Name_2-"]) ]
+    fields_o1= [ ("Adviser Representative",values["-Portfolio Manager-"]), ("Client Name",values["-Client Name-"]),("Client Name_2",values["-Client Name_2-"]) ]
     fields_o2= [ ("Licensed Portfolio Manager",values["-Portfolio Manager-"]), 
                 ("Client Name 1",values["-Client Name-"]),("Client Name 2",values["-Client Name_2-"]),
             ("Optimize Relationship Manager", values["-Optimize Relationship Manager-" ]),
@@ -47,6 +87,7 @@ def main():
 
     outputs=["Onboarding.1.pdf","Onboarding.2.pdf","Onboarding.3.pdf"]
     fields=[fields_o1,fields_o2,fields_o3]
+
 
     for i,o,f in zip(inputs,outputs,fields):
         with tf(delete=False) as fdf_file:

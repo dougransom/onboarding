@@ -10,7 +10,7 @@ version="1.0"
 description = "Utility to help Optimize relationship managers create the 3 onboarding PDF files"
 requires-python = ">=3.10"
 
-dependencies=["fdfgen >= 0.16.1","PySimpleGUI >= 4.60.4"]
+dependencies=["fdfgen >= 0.16.1","PySimpleGUI >= 4.60.4","more_itertools"]
 [project.optional-dependencies]
 dev=['pyinstaller']
 
