@@ -1,4 +1,10 @@
-PS C:\Users\doug\code\onboarding> pdftk .\o1.pdf dump_data_fields           ---
+# Introduction
+
+onboarding_fill.exe is a user interface that prepares the three Optimize onboarding files.  You only have to enter the information once in 
+the GUI (mainly client names), and all three onboarding agreement files are placed in the current folder.
+
+You do have to copy and rename the three onboarding files from Optimize as described below, and you can enter the default financial planner and portfolio manager names in one of them.
+
 
 # Installation
 
