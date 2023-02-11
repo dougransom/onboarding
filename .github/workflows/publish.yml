@@ -1,7 +1,7 @@
 name: Package Application with Pyinstaller
 
 on:
-  publish:
+  release:
     branches: [ master ]
  
 jobs:
